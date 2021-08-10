@@ -1,0 +1,28 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <meta charset="UTF-8">
+  <title>صفحه لاگین</title>
+  <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css'>
+  <link rel="stylesheet" href="{% static 'account/dist/style.css' %}">
+
+</head>
+<body>
+<!-- partial:index.partial.html -->
+<h2>Welcome - SalvatorDeli</h2>
+<div class="container" id="container">
+	<div class="form-container ">
+		<form action="#">
+			{% csrf_token %}
+			<h1>ثبت نام کنید</h1>
+			<input type="text" placeholder="نام کاربری" >
+			<input type="email" placeholder="ایمیل" >
+			<input type="password" placeholder="رمزعبور" >
+			<button type="submit" value="submit">ثبت نام</button>
+		</form>
+	</div>
+</div>
+
+</body>
+</html>

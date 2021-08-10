@@ -1,0 +1,133 @@
+{% extends 'ticket/partials/base.html' %}
+{% load static %}
+{% block content %}
+
+<body class="hold-transition sidebar-mini layout-fixed">
+    <div class="wrapper">
+        <!-- Content Wrapper. Contains page content -->
+        <div class="content-wrapper">
+           <!-- Content Header (Page header) -->
+            <div class="content-header">
+                <div class="container-fluid">
+                <div class="row mb-2">
+                    <div class="col-sm-6">
+                    <h1 class="m-0 text-dark">لیست تیکت ها</h1>
+                    </div>
+                </div><!-- /.row -->
+                </div><!-- /.container-fluid -->
+            </div>
+        <!-- /.content-header --> 
+        <!-- Main content -->
+        <section class="content">
+            <div class="container-fluid">
+                <!-- /.row -->
+            <div class="row">
+                <div class="col-12">
+                <div class="card">
+                    <div class="card-header">
+                    <h3 class="card-title">...</h3>
+            
+                    <div class="card-tools">
+                        <div class="input-group input-group-sm" style="width: 150px;">
+                        <input type="text" name="table_search" class="form-control float-right" placeholder="Search">
+            
+                        <div class="input-group-append">
+                            <button type="submit" class="btn btn-default">
+                            <i class="fas fa-search"></i>
+                            </button>
+                        </div>
+                        </div>
+                    </div>
+                    </div>
+                    <!-- /.card-header -->
+                    <div class="card-body table-responsive p-0">
+                    <table class="table table-hover text-nowrap">
+                        <thead>
+                        <tr>
+                            <th>شماره</th>
+                            <th>کاربر</th>
+                            <th>تاریخ</th>
+                            <th>توضیحات</th>
+                            <th>وضعیت تیکت</th>
+                        </tr>
+                        </thead>
+
+                        <tbody>                            
+                            {% if user.is_sup and ticket.sup_type == s %}
+                                {% for ticket in sup_tickets %}
+                                    <div>
+                                    <tr>
+                                        <td>
+                                            <a href="{%url 'ticket:ticket-detail' ticket.id %}"><button  class="btn btn-primary">{{ticket.id}}</button></a>
+                                        </td>
+                                        <td>{{ticket.user.first_name}}</td>
+                                        <td>{{ticket.jpublish}}</td>
+                                        <td>{{ticket.content|striptags|truncatewords:"30"}}</td>
+                                        
+                                        {% if ticket.status %}
+                                            <td><span class="alert alert-success" >باز است</span></td>
+                                        {% else %} 
+                                            <td><span class="alert alert-danger">بسته است</span></td>
+                                        {% endif %}                                            
+                                    </tr>
+                                </div>
+                                
+                                {% endfor %} 
+
+                            {% elif user.is_accountants and ticket.sup_type == a %}
+                                {% for ticket in acc_tickets %}
+                                    <tr>
+                                        <td>
+                                            <a href="{%url 'ticket:ticket-detail' ticket.id %}"><button  class="btn btn-primary">{{ticket.id}}</button></a>                                                      
+                                        </td>
+                                        <td>{{ticket.user.first_name}}</td>
+                                        <td>{{ticket.jpublish}}</td>
+                                        <td>{{ticket.content|striptags|truncatewords:"30"}}</td>
+                                        
+                                        {% if ticket.status %}
+                                            <td><span class="alert alert-success">باز است</span></td>
+                                        {% else %} 
+                                            <td><span class="alert alert-danger">بسته است</span></td>
+                                        {% endif %}
+                                            
+                                    </tr>
+                                {% endfor %}
+
+                            {% else %}                                
+                                {% for ticket in cus_tickets  %}
+                                
+                                <tr>                                                             
+                                            
+                                        <td>
+                                            <a href="{%url 'ticket:ticket-detail' ticket.id %}"><button  class="btn btn-primary">{{ticket.id}}</button></a> 
+                                        </td>                                          
+                                        <td>{{ticket.user.first_name}}</td>                                    
+                                        <td>{{ticket.jpublish}}</td>
+                                        <td>{{ticket.content|striptags|truncatewords:"30"}}</td>
+                                            
+                                        {% if ticket.status %}
+                                            <td><span class="alert alert-success">باز است</span></td>
+                                        {% else %} 
+                                            <td><span class="alert alert-danger">بسته است</span></td>
+                                        {% endif %}                                        
+                                    </tr>
+                                {% endfor %}                                 
+                                
+                            {% endif %}
+                                              
+                        </tbody>
+                    </table>
+                    </div>
+                    <!-- /.card-body -->
+                </div>
+                <!-- /.card -->
+                </div>
+                </div>
+            <!-- /.row -->
+            </div>
+        </section>
+    </div>
+    <!-- ./wrapper -->
+</body>
+{% endblock content %}
+

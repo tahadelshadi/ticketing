@@ -1,0 +1,66 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <meta charset="UTF-8">
+  <title>صفحه لاگین</title>
+  <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css'>
+  <link rel="stylesheet" href="{% static 'account/dist/style.css' %}">
+
+</head>
+<body>
+<!-- partial:index.partial.html -->
+<h2>Welcome - SalvatorDeli</h2>
+<div class="container" id="container">
+	<div class="form-container sign-up-container">
+		<form action="#">
+			<h1>ایجاد اکانت</h1>
+			<div class="social-container">
+				<a href="#" class="social"><i class="fab fa-facebook-f"></i></a>
+				<a href="#" class="social"><i class="fab fa-google-plus-g"></i></a>
+				<a href="#" class="social"><i class="fab fa-linkedin-in"></i></a>
+			</div>
+			<span>یا با استفاده از ایمیل ثبت نام کنید</span>
+			<input type="text" placeholder="Name" />
+			<input type="email" placeholder="Email" />
+			<input type="password" placeholder="Password" />
+			<button>Sign Up</button>
+		</form>
+	</div>
+	<div class="form-container sign-in-container">
+		<form action="#">
+			{% csrf_token %}
+			<h1>ثبت نام</h1>
+			<input type="text" placeholder="نام کاربری" />
+			<input type="email" placeholder="ایمیل" />
+			<input type="password" name="password1" placeholder="پسوورد" />
+			<input type="password" name="password2" placeholder="تایید پسوورد" />
+			<a href="#">رمزعبور خود را فراموش کردید؟</a>
+			<div class="social-container">
+				<a href="#" class="social"><i class="fab fa-facebook-f"></i></a>
+				<a href="#" class="social"><i class="fab fa-google-plus-g"></i></a>
+				<a href="#" class="social"><i class="fab fa-linkedin-in"></i></a>
+			</div>
+			<button type="submit" value="submit">ثبت نام</button>
+		</form>
+	</div>
+	<div class="overlay-container">
+		<div class="overlay">
+			<div class="overlay-panel overlay-left">
+				<h1>خوش برگشتی!</h1>
+				<p>To keep connected with us please login with your personal info</p>
+				<button class="ghost" id="signIn">Sign In</button>
+			</div>
+			<div class="overlay-panel overlay-right">
+				<h1>Hello, Friend!</h1>
+				<p>Enter your personal details and start journey with us</p>
+				<button class="ghost" id="signUp">لاگین</button>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- partial -->
+  <script  src="{% static 'account/dist/style.css' %}"></script>
+
+</body>
+</html>
