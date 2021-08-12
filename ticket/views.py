@@ -1,18 +1,18 @@
 from django.shortcuts import render
 from .models import Ticket,Response
 from .forms import TicketForm,ResponseForm
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
-
+@login_required
 def Home(request):
-    context = {
-
-    }
+    context = {}
     return render(request,'ticket/home.html',context)
 
-
-def TicketList(request):
-     #ویو نشان دادن لیست تیکت های کاربریا پشتیبان
+# ویو نشان دادن لیست تیکت های کاربر یا پشتیبان
+@login_required
+def TicketList(request):    
+     
     ticket_list = Ticket.objects.all()
     sup_tickets = Ticket.objects.filter(sup_type='s')
     acc_tickets = Ticket.objects.filter(sup_type='a')
@@ -26,8 +26,10 @@ def TicketList(request):
     }
     return render(request,'ticket/list.html',context)
 
-def AddTicket(request):
-    # ویو ثبت تیکت
+# ویو ثبت تیکت
+@login_required
+def AddTicket(request):      
+    
     if request.method == "POST":
         form = TicketForm(request.POST)
         if form.is_valid():
@@ -42,8 +44,10 @@ def AddTicket(request):
     }
     return render(request,'ticket/add.html',context)
 
-def TicketDetail(request,id):
-    # ویو نشان دادن تیکت و پاسخ های آن
+# ویو نشان دادن تیکت و پاسخ های آن
+@login_required
+def TicketDetail(request,id):       
+    
     ticketdetail = Ticket.objects.get(id=id)
     response = Response.objects.filter(ticket=ticketdetail).order_by('-pb_date')
     
@@ -55,12 +59,11 @@ def TicketDetail(request,id):
 
     return render(request,'ticket/detail.html',context)
 
+# ویو ثبت پاسخ
+@login_required
+def ResponsePage(request,id):        
 
-
-def ResponsePage(request,id):
-    # ویو ثبت پاسخ 
     ticket = Ticket.objects.get(id=id)
-
     if request.method == "POST":
         form = ResponseForm(request.POST)
         if form.is_valid() and ticket.status :
