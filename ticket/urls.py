@@ -6,9 +6,12 @@ app_name='ticket'
 
 urlpatterns = [
     
-    path('', views.Home, name="ticket-home"),
+    path('', views.Home, name="homepage"),
+    # Ticket
+    path('add/', views.AddTicket, name="ticket-add"),
     path('list/', views.TicketList, name="ticket-list"),
     path('detail/<int:id>', views.TicketDetail, name="ticket-detail"),
-    path('add/', views.AddTicket, name="ticket-add"),
-    path('response/<int:id>', views.ResponsePage, name="response-add"),
+    # Response
+    path('response/<int:id>', views.AddResponse, name="response-add"),
+
 ]

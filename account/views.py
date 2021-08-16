@@ -2,9 +2,7 @@ from django.shortcuts import render,redirect
 from .forms import SignupForm , AuthenticationForm
 from django.contrib import messages
 from django.contrib.auth import login , authenticate
-# Create your views here.
 
-#ثبت نام کاربر
 def Signup(request):            
 
     if request.method == "POST":
@@ -15,9 +13,9 @@ def Signup(request):
             messages.success(request, "ثبت نام با موفقیت انجام شد" )
             form.save()
             login(request, form)
-            return redirect("ticket:ticket-home")
+            return redirect("ticket:homepage")
         else:
-            messages.error(request, "ثبت نام ناموفق.اطلاععات وارد شده صحیح نیست")    
+            messages.error(request, "ثبت نام ناموفق.اطلاعات وارد شده صحیح نیست")    
     else:
         form = SignupForm()
 
@@ -26,12 +24,11 @@ def Signup(request):
     }
     return render(request,'account/signup.html',context)
 
-#ورود کاربر
+
 def Login(request):
 
     if request.user.is_authenticated :
-        return redirect("ticket:ticket-home")
-        
+        return redirect("ticket:homepage")       
     else:
         if request.method == "POST":
             form = AuthenticationForm(request, data=request.POST)
@@ -42,11 +39,11 @@ def Login(request):
                 if user is not None:
                     login(request, user)
                     messages.info(request, f"You are now logged in as {username}.")
-                    return redirect("ticket:ticket-home")
+                    return redirect("ticket:homepage")
                 else:
-                    messages.error(request,"Invalid username or password.")
+                    messages.error(request,"اطلاعات وارد شده صحیح نیست.")
             else:
-                messages.error(request,"Invalid username or password.")
+                messages.error(request,"اطلاعات وارد شده صحیح نیست.")
         form = AuthenticationForm()
         
     context={

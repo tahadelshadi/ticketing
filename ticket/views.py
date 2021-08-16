@@ -1,15 +1,15 @@
-from django.shortcuts import render
-from .models import Ticket,Response
+from django.shortcuts import render,redirect
+from .models import Ticket, Response
 from .forms import TicketForm,ResponseForm
 from django.contrib.auth.decorators import login_required
 
-# Create your views here.
+
 @login_required
 def Home(request):
     context = {}
     return render(request,'ticket/home.html',context)
 
-# ویو نشان دادن لیست تیکت های کاربر یا پشتیبان
+'''لیست تیکت های کاربر یا پشتیبان'''
 @login_required
 def TicketList(request):    
      
@@ -26,7 +26,7 @@ def TicketList(request):
     }
     return render(request,'ticket/list.html',context)
 
-# ویو ثبت تیکت
+
 @login_required
 def AddTicket(request):      
     
@@ -36,6 +36,7 @@ def AddTicket(request):
             form = form.save(commit=False)
             form.user = request.user
             form.save()
+            return redirect("ticket:ticket-list")
     else:
         form = TicketForm()
 
@@ -44,7 +45,7 @@ def AddTicket(request):
     }
     return render(request,'ticket/add.html',context)
 
-# ویو نشان دادن تیکت و پاسخ های آن
+'''تیکت و پاسخ های آن'''
 @login_required
 def TicketDetail(request,id):       
     
@@ -59,9 +60,9 @@ def TicketDetail(request,id):
 
     return render(request,'ticket/detail.html',context)
 
-# ویو ثبت پاسخ
+
 @login_required
-def ResponsePage(request,id):        
+def AddResponse(request,id):        
 
     ticket = Ticket.objects.get(id=id)
     if request.method == "POST":
@@ -71,6 +72,7 @@ def ResponsePage(request,id):
             form.user = request.user
             form.ticket = ticket
             form.save()
+            return redirect("ticket:ticket-detail",id=id)
     else:
         form = ResponseForm()
 

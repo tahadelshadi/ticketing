@@ -7,13 +7,13 @@ from extensions.utils import jalali_converter
 
 
 class Ticket(models.Model):
-    STATUS_CHOICES = (
+    SUP_CHOICES = (
 		('s', 'پشتیبانی'),		 
 		('a', "حسابداری"),		 
 	)
     user = models.ForeignKey(User, verbose_name=_("کاربر"),default=None, on_delete=models.CASCADE)
     title = models.CharField(_("موضوع"), max_length=50)
-    sup_type = models.CharField(_("دپارتمان"), max_length=50,choices=STATUS_CHOICES)
+    sup_type = models.CharField(_("دپارتمان"), max_length=50,choices=SUP_CHOICES)
     content = models.TextField(_("پیام"),blank=True,null=True)
     image = models.ImageField(_("عکس"), upload_to='media/ticket',blank=True,null=True)
     pb_date = models.DateTimeField(_("تاریخ انتشار"), auto_now=False, auto_now_add=False, default=datetime.now)
