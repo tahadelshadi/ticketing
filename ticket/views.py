@@ -1,5 +1,5 @@
 from django.shortcuts import render,redirect
-from .models import Ticket, Response
+from .models import Ticket, Response, Department
 from .forms import TicketForm,ResponseForm
 from django.contrib.auth.decorators import login_required
 
@@ -29,7 +29,7 @@ def TicketList(request):
 
 @login_required
 def AddTicket(request):      
-    
+    departments = Department.objects.all()
     if request.method == "POST":
         form = TicketForm(request.POST)
         if form.is_valid():
@@ -42,6 +42,7 @@ def AddTicket(request):
 
     context = {
         'form':form,
+        'departments' : departments,
     }
     return render(request,'ticket/add.html',context)
 

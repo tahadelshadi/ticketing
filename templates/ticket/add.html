@@ -54,10 +54,11 @@
                 </div>  
                 <div class="form-group">
                   <label>انتخاب دپارتمان</label>
-                  <select class="form-control" name="sup_type" placeholder="انتخاب کنید..." required>
+                  <select class="form-control" name="sup_type" required>
                     <option value="">انتخاب کنید...</option>
-                    <option value="s">پشتیبانی</option>
-                    <option value="a">حسابداری</option>
+                    {% for department in departments %}
+                      <option value="{{ department.id}}">{{department.name}}</option> 
+                    {% endif %}
                   </select>
                 </div>
                 <!-- textarea -->
