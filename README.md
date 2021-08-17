@@ -29,6 +29,6 @@ python manage.py migrate # Create Database Tables
 
 ## TODO
 - [x] logging system
-- [x] regestration system
+- [x] registration system
 - [x] creating department model
 - [x] requirements.txt file
