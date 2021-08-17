@@ -36,18 +36,36 @@
           </a>
           <ul class="nav nav-treeview">
             <li class="nav-item">
-              <a href="{%url 'ticket:ticket-list' %}" class="nav-link active">
+              <a href="{%url 'ticket:ticket-list' %}" class="nav-link ">
                 <i class="fa fa-list nav-icon"></i>
                 <p>لیست تیکت ها</p>
               </a>
             </li>
             <li class="nav-item">
               <a href="{% url 'ticket:ticket-add' %}" class="nav-link">
-                <i class="fa fa-pencil-alt nav-icon"></i>
+                <i class="fas fa-pen nav-icon"></i>
                 <p>افزودن تیکت</p>
               </a>
             </li>
           </ul>
+        </li>
+        <li class="nav-item has-treeview menu-open">
+          <a href="#" class="nav-link active">
+            <i class="nav-icon 	fas fa-user-circle"></i>
+            <p>
+              پروفایل
+              <i class="right fas fa-head-side-mask"></i>
+            </p>
+          </a>
+        
+            <li class="nav-item">
+              <a href="#" class="nav-link ">
+                <i class="fa fas fa-user-edit nav-icon"></i>
+                <p>پروفایل</p>
+              </a>
+            </li>
+            
+
         </li>
       </ul>
     </nav>

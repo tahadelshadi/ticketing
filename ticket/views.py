@@ -1,5 +1,6 @@
 from django.shortcuts import render,redirect
-from .models import Ticket, Response, Department
+from .models import Ticket, Response
+from account.models import Department
 from .forms import TicketForm,ResponseForm
 from django.contrib.auth.decorators import login_required
 
@@ -12,16 +13,15 @@ def Home(request):
 '''لیست تیکت های کاربر یا پشتیبان'''
 @login_required
 def TicketList(request):    
-     
     ticket_list = Ticket.objects.all()
-    sup_tickets = Ticket.objects.filter(sup_type='s')
-    acc_tickets = Ticket.objects.filter(sup_type='a')
     cus_tickets = Ticket.objects.filter(user=request.user)
+    
+    if request.user.is_supporter:
+        sup_tickets = Ticket.objects.filter(sup_type=request.user.department)
 
     context = {
-        'tickets': ticket_list,
+        'ticket_list': ticket_list,
         'sup_tickets':sup_tickets,
-        'acc_tickets':acc_tickets,
         'cus_tickets':cus_tickets,
     }
     return render(request,'ticket/list.html',context)
