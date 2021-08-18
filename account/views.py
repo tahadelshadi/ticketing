@@ -51,4 +51,3 @@ def Login(request):
     }
     return render(request,'account/login.html',context)
 
-

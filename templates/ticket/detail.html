@@ -1,26 +1,13 @@
 {% extends 'ticket/partials/base.html' %}
 {% load static %}
 
+{% block title %}
+تیکت شما
+{% endblock title %}
+    
 
 {% block content %}
-
-<body class="hold-transition sidebar-mini layout-fixed">
-    <div class="wrapper">
-        <!-- Content Wrapper. Contains page content -->
-        <div class="content-wrapper">
-           <!-- Content Header (Page header) -->
-            <div class="content-header">
-                <div class="container-fluid">
-                <div class="row mb-2">
-                    <div class="col-sm-6">
-                    <h1 class="m-0 text-dark">پاسخ های تیکت</h1>
-                    </div>
-                </div><!-- /.row -->
-                </div><!-- /.container-fluid -->
-            </div>
-        <!-- /.content-header --> 
         <!-- Main content -->
-            
             {% if not ticketdetail.status %}
             <div class="info-box mb-6 bg-warning">
                 <span class="info-box-icon" ><i class="fas fa-exclamation-circle" ></i></span>
@@ -41,30 +28,30 @@
                   <!-- general form elements -->
                   
                 <!--  --------------------پاسخ های تیکت------------------ -->
-                {% for res in response  %}
+                {% for response in response  %}
                     <div class="card card-primary" >
                     <!-- /.card-header -->
                         <div class="card-header" style="background-color: red;">
-                            <h3 class="card-title">{{res.user.username}}</h3>
-                            {{res.jpublish}}
+                            <h3 class="card-title">{{response.user.username}}</h3>
+                            {{response.jpublish}}
                         </div> 
                     <!-- card-body -->
                         <div class="card-body">
                             <div class="form-group">
-                                <p> {{res.content}}</p>
+                                <p>{{response.content}}</p>
                             </div>                            
                         </div>
                     <!-- /.card-body -->                        
-                        {% if res.ticket.status and forloop.first and res.user != request.user %}
+                        {% if response.ticket.status and forloop.first and response.user != request.user %}
                             <div class="card-footer">
-                                <a href="{% url 'ticket:response-add' res.ticket.id %}"><button  class="btn btn-primary">پاسخ</button></a>
+                                <a href="{% url 'ticket:response-add' response.ticket.id %}"><button  class="btn btn-primary">پاسخ</button></a>
                             </div>                     
                         {% endif %}                                
                     </div>
                 {% endfor %}
-        <!--  --------------------/.پاسخ های تیکت------------------ -->  
+                <!--  --------------------/.پاسخ های تیکت------------------ -->  
 
-        <!-- ----------------------- تیکت اصلی ------------------------>
+             <!-- ----------------------- تیکت اصلی ------------------------>
                 <div class="card card-primary">
                     <!-- card-header -->
                     <div class="card-header" style="background-color: black;">
@@ -92,7 +79,7 @@
                                 <span class="alert alert-danger">بسته است</span>
                                 {% endif %}
                                 
-                                {% if  response.count == 0 and request.user.is_sup or request.user.is_accountants  %}
+                                {% if  response.count == 0 and request.user.department or request.user.is_superuser %}
                                      <a href="{% url 'ticket:response-add' ticketdetail.id %}"><button  class="btn btn-primary">پاسخ</button></a>
                                 {% endif %}
                         
@@ -105,11 +92,6 @@
             <!-- /.row -->
                 </div><!-- /.container-fluid -->
             </div>
-        </section>
-    </div>
-    <!-- ./wrapper -->
-    </div>
-</body>
                                
                            
                            

@@ -1,24 +1,12 @@
 {% extends 'ticket/partials/base.html' %}
 {% load static %}
-{% block content %}
 
-<body class="hold-transition sidebar-mini layout-fixed">
-    <div class="wrapper">
-        <!-- Content Wrapper. Contains page content -->
-        <div class="content-wrapper">
-           <!-- Content Header (Page header) -->
-            <div class="content-header">
-                <div class="container-fluid">
-                <div class="row mb-2">
-                    <div class="col-sm-6">
-                    <h1 class="m-0 text-dark">لیست تیکت ها</h1>
-                    </div>
-                </div><!-- /.row -->
-                </div><!-- /.container-fluid -->
-            </div>
-        <!-- /.content-header --> 
+{% block title %}
+لیست تیکت ها    
+{% endblock title %}
+
+{% block content %}
         <!-- Main content -->
-        <section class="content">
             <div class="container-fluid">
                 <!-- /.row -->
             <div class="row">
@@ -52,8 +40,30 @@
                         </tr>
                         </thead>
 
-                        <tbody>                            
-                            {% if user.is_sup and ticket.sup_type == s %}
+                        <tbody>
+                            
+                            {% if user.is_superuser %}                            
+                                {% for ticket in ticket_list  %}
+                                    <tr>
+                                        <td>
+                                            <a href="{%url 'ticket:ticket-detail' ticket.id %}"><button  class="btn btn-primary">{{ticket.id}}</button></a>
+                                        </td>
+                                        <td>{{ticket.user.first_name}}</td>
+                                        <td>{{ticket.jpublish}}</td>
+                                        <td>{{ticket.content|striptags|truncatewords:"10"}}</td>
+                                        
+                                        {% if ticket.status %}
+                                            <td><span class="alert alert-success" >باز است</span></td>
+                                        {% else %} 
+                                            <td><span class="alert alert-danger">بسته است</span></td>
+                                        {% endif %}                                            
+                                    </tr>
+                                    {% empty %}
+                                        <td><b>در حال حاضر تیکتی وجود ندارد</b></td>
+                                {% endfor %}                                    
+                            
+                                                           
+                            {% elif user.is_supporter %}
                                 {% for ticket in sup_tickets %}
                                 
                                     <tr>
@@ -62,7 +72,7 @@
                                         </td>
                                         <td>{{ticket.user.first_name}}</td>
                                         <td>{{ticket.jpublish}}</td>
-                                        <td>{{ticket.content|striptags|truncatewords:"30"}}</td>
+                                        <td>{{ticket.content|striptags|truncatewords:"10"}}</td>
                                         
                                         {% if ticket.status %}
                                             <td><span class="alert alert-success" >باز است</span></td>
@@ -75,45 +85,22 @@
                                 
                                 {% endfor %} 
 
-                            {% elif user.is_accountants and ticket.sup_type == a %}
-                                {% for ticket in acc_tickets %}
-                                    <tr>
-                                        <td>
-                                            <a href="{%url 'ticket:ticket-detail' ticket.id %}"><button  class="btn btn-primary">{{ticket.id}}</button></a>                                                      
-                                        </td>
-                                        <td>{{ticket.user.first_name}}</td>
-                                        <td>{{ticket.jpublish}}</td>
-                                        <td>{{ticket.content|striptags|truncatewords:"30"}}</td>
-                                        
-                                        {% if ticket.status %}
-                                            <td><span class="alert alert-success">باز است</span></td>
-                                        {% else %} 
-                                            <td><span class="alert alert-danger">بسته است</span></td>
-                                        {% endif %}
-                                            
-                                    </tr>
-                                    {% empty %}
-                                        <td><b>در حال حاضر تیکتی وجود ندارد</b></td>
-                                {% endfor %}
-
                             {% else %}                                
                                 {% for ticket in cus_tickets  %}
-                                
-                                <tr>                                                             
-                                            
+                                    <tr>                                                              
                                         <td>
                                             <a href="{%url 'ticket:ticket-detail' ticket.id %}"><button  class="btn btn-primary">{{ticket.id}}</button></a> 
                                         </td>                                          
                                         <td>{{ticket.user.first_name}}</td>                                    
                                         <td>{{ticket.jpublish}}</td>
-                                        <td>{{ticket.content|striptags|truncatewords:"30"}}</td>
+                                        <td>{{ticket.content|striptags|truncatewords:"10"}}</td>
                                             
                                         {% if ticket.status %}
                                             <td><span class="alert alert-success">باز است</span></td>
                                         {% else %} 
                                             <td><span class="alert alert-danger">بسته است</span></td>
                                         {% endif %}                                        
-                                </tr>
+                                    </tr>
                                     {% empty %}
                                         <td><b>در حال حاضر تیکتی وجود ندارد</b></td>
                                 {% endfor %}                                 
@@ -130,9 +117,7 @@
                 </div>
             <!-- /.row -->
             </div>
-        </section>
-    </div>
-    <!-- ./wrapper -->
-</body>
+
+
 {% endblock content %}
 

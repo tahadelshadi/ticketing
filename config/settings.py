@@ -11,7 +11,7 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 
 from pathlib import Path
-# from .config import *
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -24,7 +24,8 @@ LOGOUT_REDIRECT_URL = "login"
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = ''
+SECRET_KEY = 'django-insecure-*8u8$m1fmvlsc0bgz-9=)6$gh7(d!gq28%3h4fp19aedtl%oph'
+
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
@@ -139,5 +140,5 @@ AUTH_USER_MODEL = 'account.User'
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
-DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
