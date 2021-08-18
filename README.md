@@ -2,7 +2,6 @@
 
 A simple Ticketing system.
 
-
 ## Run On Windows
 
 If You're On A Windows Machine, Make Environment Ready By Following Steps Below:
@@ -20,14 +19,3 @@ python manage.py migrate # Create Database Tables
 ```
 4. Run `Ticketing` using `python manage.py runserver`
 5. Go to [http://localhost:8000](http://localhost:8000) to see your Ticketing version.
-
-## Used in :
-
-- [Tajrobam social media (soon) ]('#')
-
-
-## TODO
-- [x] logging system
-- [x] registration system
-- [x] creating department model
-- [x] requirements.txt file
