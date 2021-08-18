@@ -1,12 +1,11 @@
 # Ticketing System
 
 A simple Ticketing system.
-یک سیستم تیکتینگ ( پرسش و پاسخ فنی )  ساده 
 
 
 ## Run On Windows
 
-If You're On A Windows Machine , Make Environment Ready By Following Steps Below:
+If You're On A Windows Machine, Make Environment Ready By Following Steps Below:
 1. Install `python3`, `pip`, `virtualenv` 
 2. Clone the project using:  `git clone https://github.com/tahadelshadi/ticketing.git`.
 3. Make Environment Ready Like This:
