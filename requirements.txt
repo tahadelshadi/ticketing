@@ -4,10 +4,6 @@ Django==3.2.6
 django-filter==2.4.0
 django-jalali==4.3.0
 djangorestframework==3.12.4
-graphene==2.1.9
-graphene-django==2.15.0
-graphql-core==2.3.2
-graphql-relay==2.0.1
 jdatetime==3.6.2
 Markdown==3.3.4
 Pillow==8.3.1
