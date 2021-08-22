@@ -1,6 +1,6 @@
 # Ticketing System
 
-A simple Ticketing system.
+A simple Ticketing system.(created with django/python)
 
 ## Run On Windows
 
